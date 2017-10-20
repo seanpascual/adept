@@ -134,7 +134,7 @@ To Compile an app:
 ---
 Once you have customized and compiled the app it will need to packaged as a native Apple .pkg and uploaded to your Jamf distribution point(s).
 
-We would also reccomend including the contents of the PKG Resources folder within your package. Included in this folde are a launcher script which checks if DEP-Enrolment apps has run previously and if it competed sucessfully, and a luanch agent used to run the app after package instalation. If you are using the launch agent method for the initial applicaton launch (which we have found to be the most reliable method to ensure the app launcshes at the right time) a postflight script will all need to be added to the package as below.
+We would also reccomend including the contents of the PKG Resources folder within your package. Included in this folder are a launcher script which checks if DEP-Enrolment apps has run previously and if it competed sucessfully, and a luanch agent used to run the app after package instalation. If you are using the launch agent method for the initial applicaton launch (which we have found to be the most reliable method to ensure the app launcshes at the right time) a postflight script will all need to be added to the package as below.
 
 ```
 #!/bin/sh
