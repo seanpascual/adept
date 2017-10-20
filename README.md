@@ -154,7 +154,7 @@ exit 1		## Failure
 
 ```
 
-![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/dep-enrolment/raw/Screenshots/PAckageLayout.png?at=refs%2Fheads%2Fmaster)  
+![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/dep-enrolment/raw/Screenshots/PackageLayout.png?at=refs%2Fheads%2Fmaster)  
 
 ##### Create Policy to Deploy DEP-Enrolment app  
 
