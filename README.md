@@ -154,6 +154,7 @@ exit 1		## Failure
 
 ```
 
+Below is a example of the internal layout of the package  
 ![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/dep-enrolment/raw/Screenshots/PackageLayout.png?at=refs%2Fheads%2Fmaster)  
 
 ##### Create Policy to Deploy DEP-Enrolment app  
