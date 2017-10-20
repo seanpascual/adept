@@ -3,40 +3,47 @@ DEP Enrolment Setup Screen
 
 ### Description & Overview  
 
-**A Setup/ Splash screen for DEP and user initiated Jamf Pro enrollments. Designed to run post enrollmnet. This is a template and although it does work as is you are most likley going to need make changes to better suit your requirements and enviroment.**  
+**A Setup / Splash screen for DEP and user initiated Jamf Pro enrollments. Designed to run post enrollmnet. This is a template and will most likley need customisation to suit your requirements and enviroment.** 
+
+**This project was created at Trams Ltd to aid our customers with zero touch deployment and is made available below for the benefit of the wider Mac admin community**
+
+**We welcome feedback and feature requests from the community, these should be sent to oss@tramscloud.co.uk**
+
+**If you would like to discuss our instalation/deployment/customisation/support services for this tool please email sales@tramscloud.co.uk**
 
 #### A Quick Walkthough of how it Works  
 
-1. Full screen splash is displayed allowing the user to enter there name, asset tag, choose a department and then begin the process (will not start if the text fields are left empty). This will scale to fit the screen size, will sit above all other windows and cannot be moved. cmd + q will quit the application but that can be changed and is explaned later on.  
-2. Once the process has begun the user details will be submited to the Jamf server and a plist containing the details will be wirten to the "/Library/ Application Support/JAMF" folder. The view will also update (note the plist and user details submition happen as asynchronous background processes).  
-3. Once the new view has appeared a "jamf policy" will run with a custom event trigger (again this is a background process). The user will see some progress indicators that that will update with ticks once completed. There is also a status label that shows the last entry in the jamf.log (The method used for the status label is from [Jason Tratta](https://github.com/jason-tratta))
-4. Once the entire process has completed the view will update to indicate that everything has finished and a finish button is displayed.  
-5. Clicking the finish button will close the current window and open a smaller one (not full screen and movable) that can display web content or pages. The below image shows the views and windows:  
+1. Full screen splash is displayed allowing the user to enter there name, asset tag, choose a department and then begin the process (will not start if the text fields are left empty). This will scale to fit the screen size, will sit above all other windows and cannot be moved. By default cmd + q will quit the application but that can be changed and described later in this doument.  
+2. Once the process has begun the user details will be submited to the Jamf server and a plist containing the details will be wirten to the "/Library/Application Support/JAMF" folder. The view will also update (note the plist and user details submition happen as asynchronous background processes).  
+3. Once the new view has appeared a "jamf policy" will run with a custom event trigger (again this is a background process). The user will see some progress indicators that that update with ticks once completed. There is also a status label that shows the last entry in the jamf.log (The method used for the status label is from [Jason Tratta](https://github.com/jason-tratta))
+4. Once the entire process has completed the view will update to indicate that the process has completed and a finish button is displayed.  
+5. Clicking the finish button will close the current window and open a smaller one (not full screen and movable) whdih can display web content or pages. The below image shows the views and windows:  
 
-![alt tag](https://github.com/gavinpardoe/DEP-Enrolment/blob/master/Screenshots/Overview.png?raw=true)
+![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/dep-enrolment/raw/Screenshots/Overview.png?at=refs%2Fheads%2Fmaster)
 
 ### Requirements
 ---
-Created with Xcode 8 and swift 3.0, Xcode 8 or higher needed. Wilst this may be uable with other MDM's it was created for use with Jamf Pro, recomend being on the latest version or at least within the last 3 releases of Jamf Pro.
+Created with Xcode 8 and swift 3.0, Xcode 8 or higher required. While this tool may be uasble with other MDM's it was created for use with Jamf Pro, and we recomend running on the latest version or at least within the last 3 releases of Jamf Pro.
 
 Tested and Supported Clients:
 
 10.11 (El Capitan)  
-10.12 (Sierra)
+10.12 (Sierra)  
+10.13 (High Sierra)  
 
 In the below documentation there will be refrences to line numbers within Xcode. By default line numbers are not shown in Xcode. To show them open Xcode Preferencs and click on the Text Editing tab, within that tab click Editing and then tick the Show Line Numbers check box.
 
 ### App Structure  
 ---
-![alt tag](https://github.com/gavinpardoe/DEP-Enrolment/blob/master/Screenshots/structure.png?raw=true)  
+![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/dep-enrolment/raw/Screenshots/structure.png?at=refs%2Fheads%2Fmaster)  
 
 ### Editing in Xcode
 ---
-**Im only going to list some of the basic changes that can be made, to list everything would take a lot of documentation!**  
+**Below are some of the basic changes that can be made, to list everything would take a lot of documentation!**  
 
 Download and open the project in Xcode. The navigation pane on the left will list various files:
 
-![alt tag](https://github.com/gavinpardoe/DEP-Enrolment/blob/master/Screenshots/xcodeStructure.png?raw=true)  
+![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/dep-enrolment/raw/Screenshots/xcodeStructure.png?at=refs%2Fheads%2Fmaster)  
 
 The main files/ folders you will be working with are:
 
@@ -125,18 +132,39 @@ To Compile an app:
 
 ### Usage with Jamf Pro  
 ---
-Once you have customized and compiled the app it will need to packaged as a native Apple .pkg and uploaded to your Jamf distribution point(s).  
+Once you have customized and compiled the app it will need to packaged as a native Apple .pkg and uploaded to your Jamf distribution point(s).
 
-##### Create Policy to Deploy and run the DEP-Enrolment App  
+We would also reccomend including the contents of the PKG Resources folder within your package. Included in this folde are a launcher script which checks if DEP-Enrolment apps has run previously and if it competed sucessfully, and a luanch agent used to run the app after package instalation. If you are using the launch agent method for the initial applicaton launch (which we have found to be the most reliable method to ensure the app launcshes at the right time) a postflight script will all need to be added to the package as below.
 
-1. Create a policy with the 'Enrollment Complete' trigger  
+```
+#!/bin/sh
+## postflight
+##
+## Not supported for flat packages.
+
+pathToScript=$0
+pathToPackage=$1
+targetLocation=$2
+targetVolume=$3
+
+launchctl load /Library/LaunchDaemons/com.trams.depapplaunch.plist
+
+exit 0		## Success
+exit 1		## Failure
+
+```
+
+![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/dep-enrolment/raw/Screenshots/PAckageLayout.png?at=refs%2Fheads%2Fmaster)  
+
+##### Create Policy to Deploy DEP-Enrolment app  
+
+1. Create a policy with the 'Enrolment Complete' trigger  
 2. Add the DEP app package  
-3. scope to all computers or relivent smart group  
-4. Add either a command or a script (with priority of after), similar to: ```sudo -b /Library/Application\ Support/JAMF/DEP-Enrolment.app/Contents/MacOS/DEP-Enrolment``` This is just the path to executable within the app bundle (sudo and -b are reqiured)  
+3. scope to all computers or relivent smart group   
 
 This will download and run the the DEP- app as root POST Enrollment, you should see something similar to the below:  
 
-![alt tag](https://github.com/gavinpardoe/DEP-Enrolment/blob/master/Screenshots/View%201.png?raw=true)  
+![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/dep-enrolment/raw/Screenshots/View%201.png?at=refs%2Fheads%2Fmaster)  
 
 ##### Create Policy(s) to Install and Configure  
 
@@ -161,13 +189,10 @@ This can done using just a single policy or spread accorss multipule, its down t
   * H-SystemSettings.receipt.pkg (delivers the systemsettings receipt, which will cause the installation progress to update)  
   * I-InstallSophos.pkg  
   * J-OSXSecurityUpdate.pkg  
-  * L-SecuritySettings.receipt.pkg (delivers the securitysettings receipt, which will cause the installation progress to update)  
-6. Add script with priortiy of after (could also be a command) with the following ```touch "/Library/Application Support/JAMF/DEPSetupComplete.receipt"``` this will create the final receipt and tell the DEP-Enrolment app that the process is complete.  
+  * L-SecuritySettings.receipt.pkg (delivers the securitysettings receipt, which will cause the installation progress to update)    
 
 Note: The receipts get cleaned once the finish button is pressed.  
 
-![alt tag](https://github.com/gavinpardoe/DEP-Enrolment/blob/master/Screenshots/InstallProgress.png?raw=true)  
-
-This is just one way of using this, with a little thought and effort this process could be imporved upon.  
+![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/dep-enrolment/raw/Screenshots/InstallProgress.png?at=refs%2Fheads%2Fmaster)  
 
   
