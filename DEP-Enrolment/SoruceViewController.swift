@@ -162,7 +162,7 @@ class SoruceViewController: NSViewController, NSTextFieldDelegate {
             start()
             
             // Performs View Segue, with Custom Segue
-            performSegue(withIdentifier: "segue1", sender: self)
+            performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "segue1"), sender: self)
             
             }
         
@@ -178,7 +178,7 @@ class SoruceViewController: NSViewController, NSTextFieldDelegate {
         alert.addButton(withTitle: "Ok")
         
         alert.beginSheetModal(for: self.view.window!, completionHandler: { (returnCode) -> Void in
-            if returnCode == NSAlertFirstButtonReturn {
+            if returnCode == NSApplication.ModalResponse.alertFirstButtonReturn {
                 
             }
         })

@@ -31,8 +31,8 @@ class ContainerViewController: NSViewController {
         
         
         // Refrence to Main.storyboard & SourceViewController
-        let mainStoryboard: NSStoryboard = NSStoryboard(name: "Main", bundle: nil)
-        let sourceViewController = mainStoryboard.instantiateController(withIdentifier: "sourceViewController") as! NSViewController
+        let mainStoryboard: NSStoryboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
+        let sourceViewController = mainStoryboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "sourceViewController")) as! NSViewController
         
         // Set sourceViewController as Child of containerViewContoler, with Index ID of 0 & Display as Subview
         self.insertChildViewController(sourceViewController, at: 0)

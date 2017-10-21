@@ -44,7 +44,7 @@ class WebViewController: NSViewController {
     
     @IBAction func closeButton(_ sender: Any) {
         
-        NSApplication.shared().terminate(self)
+        NSApplication.shared.terminate(self)
         
     }
     

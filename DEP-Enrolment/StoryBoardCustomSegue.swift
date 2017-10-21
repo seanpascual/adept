@@ -27,17 +27,17 @@ import Cocoa
 // Creates a Custom Storyboard Segue between Source & Second View Controllers
 class StoryBoardCustomSegue: NSStoryboardSegue {
     
-    override init(identifier: String?,
+    override init(identifier: NSStoryboardSegue.Identifier,
                   source sourceController: Any,
                   destination destinationController: Any) {
         var myIdentifier : String
         if identifier == nil {
             myIdentifier = ""
         } else {
-            myIdentifier = identifier!
+            myIdentifier = identifier.rawValue
         }
         
-        super.init(identifier: myIdentifier, source: sourceController, destination: destinationController)
+        super.init(identifier: NSStoryboardSegue.Identifier(rawValue: myIdentifier), source: sourceController, destination: destinationController)
         
         }
     
@@ -52,7 +52,7 @@ class StoryBoardCustomSegue: NSStoryboardSegue {
         sourceViewController.view.wantsLayer = true
         destinationViewController.view.wantsLayer = true
         
-        containerViewController.transition(from: sourceViewController, to: destinationViewController, options: NSViewControllerTransitionOptions.crossfade, completionHandler: nil)
+        containerViewController.transition(from: sourceViewController, to: destinationViewController, options: NSViewController.TransitionOptions.crossfade, completionHandler: nil)
         
     }
 

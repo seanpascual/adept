@@ -105,7 +105,7 @@ class SecondViewController: NSViewController {
     }
     
     // Updates the statusLabel
-    func updateStatusLabel() {
+    @objc func updateStatusLabel() {
         
         statusLabel.stringValue = showLog()
         
@@ -120,7 +120,7 @@ class SecondViewController: NSViewController {
             let logString =  NSString(data: log as Data, encoding: String.Encoding.utf8.rawValue)
             
             let theRange = logString?.range(of: "]:", options: .backwards)
-            let scanner = Scanner(string: logString as! String)
+            let scanner = Scanner(string: logString! as String)
             scanner.scanLocation = (theRange?.location)!
             
             let lineReturn = NSMutableCharacterSet.newline()
@@ -148,12 +148,12 @@ class SecondViewController: NSViewController {
 
     
     // Checks for Installation Recipts
-    func checkInstallProgress() {
+    @objc func checkInstallProgress() {
         
         if receiptPath.fileExists(atPath: "/Library/Application Support/JAMF/Applications.receipt") {
             
             self.prog1.stopAnimation(self)
-            self.tick1.image = NSImage(named: "check.png")
+            self.tick1.image = NSImage(named: NSImage.Name(rawValue: "check.png"))
             
         } else {
             
@@ -163,7 +163,7 @@ class SecondViewController: NSViewController {
         if receiptPath.fileExists(atPath: "/Library/Application Support/JAMF/UISettings.receipt") {
             
             self.prog2.stopAnimation(self)
-            self.tick2.image = NSImage(named: "check.png")
+            self.tick2.image = NSImage(named: NSImage.Name(rawValue: "check.png"))
             
         } else {
             
@@ -173,7 +173,7 @@ class SecondViewController: NSViewController {
         if receiptPath.fileExists(atPath: "/Library/Application Support/JAMF/SystemSettings.receipt") {
             
             self.prog3.stopAnimation(self)
-            self.tick3.image = NSImage(named: "check.png")
+            self.tick3.image = NSImage(named: NSImage.Name(rawValue: "check.png"))
             
         } else {
             
@@ -183,7 +183,7 @@ class SecondViewController: NSViewController {
         if receiptPath.fileExists(atPath: "/Library/Application Support/JAMF/SecuritySettings.receipt") {
             
             self.prog4.stopAnimation(self)
-            self.tick4.image = NSImage(named: "check.png")
+            self.tick4.image = NSImage(named: NSImage.Name(rawValue: "check.png"))
             
         } else {
             
@@ -193,7 +193,7 @@ class SecondViewController: NSViewController {
         if receiptPath.fileExists(atPath: "/Library/Application Support/JAMF/DEPSetupComplete.receipt") {
             
             // Updates the Main Image and Label on Completion
-            self.imageView.image = NSImage(named: "mbpWhiteTick.png")
+            self.imageView.image = NSImage(named: NSImage.Name(rawValue: "mbpWhiteTick.png"))
             mainLabel.stringValue = "Setup Complete"
             
             // Enables and Displays the Finish Button on Completion
@@ -227,14 +227,17 @@ class SecondViewController: NSViewController {
             try fileManager.removeItem(atPath: "/Library/Application Support/JAMF/SecuritySettings.receipt")
             try fileManager.removeItem(atPath: "/Library/Application Support/JAMF/DEPSetupComplete.receipt")
             
+            
         }
             
         catch let error as Error {
             print("Recipt Not Removed: \(error)")
         }
         
+        fileManager.createFile(atPath: "/Library/Application Support/JAMF/.DEP-EnrolmentComplete", contents: nil, attributes: nil)
+        
         // Performs View Segue to the Web View
-        performSegue(withIdentifier: "segue2", sender: self)
+        performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "segue2"), sender: self)
         
         // Closes the Current Window
         self.view.window?.close()

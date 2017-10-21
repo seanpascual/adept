@@ -36,13 +36,13 @@ class MainWindowController: NSWindowController {
         
         
         // Get Screen Size as NSRect, Set Windows Size as Percent of Screen Size 
-        let screenSize: NSRect = (NSScreen.main()?.frame)!
+        let screenSize: NSRect = (NSScreen.main?.frame)!
         let percent: CGFloat = 1.0
         let offset: CGFloat = (1.0-percent)/2.0
         self.window!.setFrame(NSMakeRect(screenSize.size.width*offset, screenSize.size.height*offset, screenSize.size.width*percent, screenSize.size.height*percent), display: true)
         
         // Set Window Level
-        self.window!.level = Int(CGWindowLevelForKey(.statusWindow))
+        self.window!.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.statusWindow)))
         self.window!.makeKeyAndOrderFront(nil)
      
         
