@@ -143,7 +143,7 @@ Below is a example of the internal layout of the package
 
 1. Create a policy with the 'Enrolment Complete' trigger  
 2. Add the DEP app package  
-3. scope to all computers or relivent smart group   
+3. Scope to all computers or relivent smart group   
 
 This will download and run the the DEP- app as root POST Enrollment, you should see something similar to the below:  
 
@@ -152,12 +152,11 @@ This will download and run the the DEP- app as root POST Enrollment, you should 
 ##### Create Policy to check if DEP-Enrolment app completed (optional)
 1. Create a policy with the 'Login' trigger
 2. Run the script below
+3. Scope to the same group at the DEP-Enrolment app policy above
 
 ```
 #!/bin/bash -x
-
 /Library/Application\ Support/JAMF/DEP-EnrolmentLauncher.sh
-
 exit 0
 ```  
 
@@ -184,7 +183,14 @@ This can done using just a single policy or spread accorss multipule, its down t
   * H-SystemSettings.receipt.pkg (delivers the systemsettings receipt, which will cause the installation progress to update)  
   * I-InstallSophos.pkg  
   * J-OSXSecurityUpdate.pkg  
-  * L-SecuritySettings.receipt.pkg (delivers the securitysettings receipt, which will cause the installation progress to update)    
+  * L-SecuritySettings.receipt.pkg (delivers the securitysettings receipt, which will cause the installation progress to update) 
+ 6. Add a script with priorty 'After' as below, this triggers with Finish button to be displayed 
+
+ ```
+#!/bin/bash
+sudo touch "/Library/Application Support/JAMF/DEPSetupComplete.receipt"
+exit 0
+ ```   
 
 Note: The receipts get cleaned once the finish button is pressed.  
 
