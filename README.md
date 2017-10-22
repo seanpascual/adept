@@ -65,10 +65,10 @@ This is the contect that gets displayed in the WebView. It can also display host
 Subclass of NSWindowContoller. Used by MainWindow in the storyboard to set window size, level and apperance.  
 
 To Change Window Size: (Note this have been designed to run using the full size of the main screen)  
-Edit ```let percent: CGFloat = 1.0``` on line 40 of MainViewController.swift, where 1.0 = 100%, 0.5 = 50%  
+Edit ```let percent: CGFloat = 1.0``` on line 39 of MainWindowController.swift, where 1.0 = 100%, 0.5 = 50%  
 
 To Change background colour:  
-Edit ```window?.backgroundColor = NSColor.white``` on line 35 of MainViewController.swift, where white = colour (Black, Blue, Red, etc)  
+Edit ```window?.backgroundColor = NSColor.white``` on line 34 of MainWindowController.swift, where white = colour (Black, Blue, Red, etc)  
 
 #### SourceViewController  
 
@@ -76,13 +76,13 @@ Subclass of NSViewController & NSTextFieldDelegate. Used by the SourceView.
 
 Add/ remove departments:  
 
-Edit ```department = ["Accounts", "Design", "Marketing", "Operations", "Sales", "Service"]``` on line 48 of SourceViewController.swift, change remove the department names within the quotes. You can add more entries just make sure to comma seperate them.  
+Edit ```department = ["Accounts", "Design", "Marketing", "Operations", "Sales", "Service"]``` on line 47 of SourceViewController.swift, change remove the department names within the quotes. You can add more entries just make sure to comma seperate them.  
 **Note that the departments must exist within departments in your Jamf server**  
 
 Modify Text Field constraints:  
 These restrict the characters that can be typed in the text fields.  
 
-Edit ```let characterSet: CharacterSet = CharacterSet(charactersIn:     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789-_").inverted``` and ```let alphaCharSet: CharacterSet = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ.").inverted```  on lines 59 & 60  
+Edit ```let characterSet: CharacterSet = CharacterSet(charactersIn:     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789-_").inverted``` and ```let alphaCharSet: CharacterSet = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ.").inverted```  on lines 58 & 59 
 Characters listed are allowed, anything not listed is restricted. CharaterSet applies to the Asset Tag Field and alphaCharSet applies to the Username field.  
 
 Empty Text Fields:  
@@ -97,21 +97,21 @@ subclass of NSViewController. Used by the SecondView
 
 Custom Policy Trigger:  
 
-Edit ```let appleScriptPolicy = NSAppleScript(source: "do shell script \"/usr/local/jamf/bin/jamf policy -event DEP \" with administrator " + "privileges")!.executeAndReturnError(nil)``` on line 86 change DEP after 'jamf policy -event' with your custom policy trigger name.  
+Edit ```let appleScriptPolicy = NSAppleScript(source: "do shell script \"/usr/local/jamf/bin/jamf policy -event DEP \" with administrator " + "privileges")!.executeAndReturnError(nil)``` on line 85 change DEP after 'jamf policy -event' with your custom policy trigger name.  
 
 Check Policy Receipt Time:  
 How often policy receipts are checked, default is 8 seconds.  
 
-Edit ```let timerInt = TimeInterval(8.0)``` on line 212 change 8.0 to amount os seconds reqiured.  
+Edit ```let timerInt = TimeInterval(8.0)``` on line 211 change 8.0 to amount os seconds reqiured.  
 
 #### WebViewController  
 
 subclass of NSViewController. Used by the WebView  
 
 By default this is loading HTML content within the app. This can be changed to instead display a web page.  
-To change this first comment out ```let htmlPage = Bundle.main.url(forResource: "index", withExtension: "html")``` and ```webView.mainFrame.load(URLRequest(url: htmlPage!))``` on lines 36 & 37 by placing // infront of them.  
+To change this first comment out ```let htmlPage = Bundle.main.url(forResource: "index", withExtension: "html")``` and ```webView.mainFrame.load(URLRequest(url: htmlPage!))``` on lines 35 & 36 by placing // infront of them.  
 
-You now need to remove the // from ```let url = NSURL (string: "https://tramscloud.co.uk")``` and  ```webView.mainFrame.load(URLRequest(url: url as! URL))``` on lines 40 & 41  
+You now need to remove the // from ```let url = NSURL (string: "https://tramscloud.co.uk")``` and  ```webView.mainFrame.load(URLRequest(url: url as! URL))``` on lines 39 & 40  
 
 Now just change the URL in ```let url = NSURL (string: "https://tramscloud.co.uk")``` on line 40  
 
