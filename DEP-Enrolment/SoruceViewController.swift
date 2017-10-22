@@ -1,15 +1,14 @@
 //
-//  SoruceViewController.swift
+//  SourceViewController.swift
 //  DEP-Enrolment
 //
-//  Created by Gavin on 05/11/2016.
-//  Copyright © 2016 Trams Ltd. All rights reserved.
+//  Copyright © 2017 Trams Ltd. All rights reserved.
 //
 //  Designed for Use with Jamf Pro.
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2016 Gavin Pardoe
+//  Copyright (c) 2017 Trams Ltd. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software
 //  without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
@@ -80,7 +79,7 @@ class SoruceViewController: NSViewController, NSTextFieldDelegate {
             let appleScriptRecon = NSAppleScript(source: "do shell script \"/usr/local/jamf/bin/jamf recon -assetTag \(assetTagValue) -endUsername \(usernameValue) -department \(departmentValue)\" with administrator " + "privileges")!.executeAndReturnError(nil)
             let result = appleScriptRecon.stringValue
             
-            if ((result?.contains("<computer_id")) != nil) {
+            if ((result?.contains("computer_id")) != nil) {
                 //debugPrint("process completed")
                 
                 // Specify Values for .plist
@@ -160,6 +159,8 @@ class SoruceViewController: NSViewController, NSTextFieldDelegate {
             
             // Calls the start Function
             start()
+            
+            //debugPrint("Started")
             
             // Performs View Segue, with Custom Segue
             performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "segue1"), sender: self)
