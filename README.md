@@ -23,7 +23,7 @@ DEP Enrolment Setup Screen
 
 ### Requirements
 ---
-Created with Xcode 8 and swift 3.0, Xcode 8 or higher required. While this tool may be uasble with other MDM's it was created for use with Jamf Pro, and we recomend running on the latest version or at least within the last 3 releases of Jamf Pro.
+Created with Xcode 9 and swift 4, Xcode 9 or higher required. While this tool may be uasble with other MDM's it was created for use with Jamf Pro, and we recomend running on the latest version or at least within the last 3 releases of Jamf Pro.
 
 Tested and Supported Clients:
 
@@ -134,25 +134,7 @@ To Compile an app:
 ---
 Once you have customized and compiled the app it will need to packaged as a native Apple .pkg and uploaded to your Jamf distribution point(s).
 
-We would also reccomend including the contents of the PKG Resources folder within your package. Included in this folder are a launcher script which checks if DEP-Enrolment apps has run previously and if it competed sucessfully, and a luanch agent used to run the app after package instalation. If you are using the launch agent method for the initial applicaton launch (which we have found to be the most reliable method to ensure the app launcshes at the right time) a postflight script will all need to be added to the package as below.
-
-```
-#!/bin/sh
-## postflight
-##
-## Not supported for flat packages.
-
-pathToScript=$0
-pathToPackage=$1
-targetLocation=$2
-targetVolume=$3
-
-launchctl load /Library/LaunchDaemons/com.trams.depapplaunch.plist
-
-exit 0		## Success
-exit 1		## Failure
-
-```
+We reccomend including the contents of the PKG Resources folder within your package. Included in this folder are a launcher script which checks if DEP-Enrolment apps has run previously and if it competed sucessfully, and a luanch agent used to run the app after package instalation and a postflight script to launch the screens after instalation.
 
 Below is a example of the internal layout of the package  
 ![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/dep-enrolment/raw/Screenshots/PackageLayout.png?at=refs%2Fheads%2Fmaster)  
@@ -161,11 +143,22 @@ Below is a example of the internal layout of the package
 
 1. Create a policy with the 'Enrolment Complete' trigger  
 2. Add the DEP app package  
-3. scope to all computers or relivent smart group   
+3. Scope to all computers or relivent smart group   
 
 This will download and run the the DEP- app as root POST Enrollment, you should see something similar to the below:  
 
 ![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/dep-enrolment/raw/Screenshots/View%201.png?at=refs%2Fheads%2Fmaster)  
+
+##### Create Policy to check if DEP-Enrolment app completed (optional)
+1. Create a policy with the 'Login' trigger
+2. Run the script below
+3. Scope to the same group at the DEP-Enrolment app policy above
+
+```
+#!/bin/bash -x
+/Library/Application\ Support/JAMF/DEP-EnrolmentLauncher.sh
+exit 0
+```  
 
 ##### Create Policy(s) to Install and Configure  
 
@@ -190,7 +183,14 @@ This can done using just a single policy or spread accorss multipule, its down t
   * H-SystemSettings.receipt.pkg (delivers the systemsettings receipt, which will cause the installation progress to update)  
   * I-InstallSophos.pkg  
   * J-OSXSecurityUpdate.pkg  
-  * L-SecuritySettings.receipt.pkg (delivers the securitysettings receipt, which will cause the installation progress to update)    
+  * L-SecuritySettings.receipt.pkg (delivers the securitysettings receipt, which will cause the installation progress to update) 
+ 6. Add a script with priorty 'After' as below, this triggers with Finish button to be displayed 
+
+ ```
+#!/bin/bash
+sudo touch "/Library/Application Support/JAMF/DEPSetupComplete.receipt"
+exit 0
+ ```   
 
 Note: The receipts get cleaned once the finish button is pressed.  
 

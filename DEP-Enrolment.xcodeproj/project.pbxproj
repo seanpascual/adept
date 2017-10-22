@@ -160,7 +160,7 @@
 				TargetAttributes = {
 					8616EE391DCE6378009D8E58 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = LTKP23G44G;
+						DevelopmentTeam = S7QZZVPL24;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -348,7 +348,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = LTKP23G44G;
+				DEVELOPMENT_TEAM = S7QZZVPL24;
 				INFOPLIST_FILE = "DEP-Enrolment/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
@@ -367,7 +367,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = LTKP23G44G;
+				DEVELOPMENT_TEAM = S7QZZVPL24;
 				INFOPLIST_FILE = "DEP-Enrolment/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
