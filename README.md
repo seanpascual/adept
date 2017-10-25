@@ -3,11 +3,11 @@ DEP Enrolment Setup Screen
 
 ### Description & Overview  
 
-**A Setup / Splash screen for DEP and user initiated Jamf Pro enrollments. Designed to run post enrollmnet. This is a template and will most likley need customisation to suit your requirements and enviroment.** 
+**A Setup / Splash screen for DEP and user initiated Jamf Pro enrolments. Designed to run post enrolment. This is a template and will most likley need customisation to suit your requirements and environment.**
 
 **This project was created at Trams Ltd to aid our customers with zero touch deployment and is made available below for the benefit of the wider Mac admin community**
 
-**We welcome feedback and feature requests from the community, these should be sent to oss@tramscloud.co.uk**
+**We welcome feedback and feature requests from the community, these should be sent to oss@tramscloud.co.uk, or the developer can be found on the MacAdmins slack channel with the username joe.steele**
 
 **If you would like to discuss our instalation/deployment/customisation/support services for this tool please email sales@tramscloud.co.uk**
 
