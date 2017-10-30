@@ -19,7 +19,7 @@ DEP Enrolment Setup Screen
 4. Once the entire process has completed the view will update to indicate that the process has completed and a finish button is displayed.  
 5. Clicking the finish button will close the current window and open a smaller one (not full screen and movable) whdih can display web content or pages. The below image shows the views and windows:  
 
-![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/dep-enrolment/raw/Screenshots/Overview.png?at=refs%2Fheads%2Fmaster)
+![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/adept/raw/Screenshots/Overview.png?at=refs%2Fheads%2Fmaster)
 
 ### Requirements
 ---
@@ -35,7 +35,7 @@ In the below documentation there will be refrences to line numbers within Xcode.
 
 ### App Structure  
 ---
-![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/dep-enrolment/raw/Screenshots/structure.png?at=refs%2Fheads%2Fmaster)  
+![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/adept/raw/Screenshots/structure.png?at=refs%2Fheads%2Fmaster)  
 
 ### Editing in Xcode
 ---
@@ -43,7 +43,7 @@ In the below documentation there will be refrences to line numbers within Xcode.
 
 Download and open the project in Xcode. The navigation pane on the left will list various files:
 
-![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/dep-enrolment/raw/Screenshots/xcodeStructure.png?at=refs%2Fheads%2Fmaster)  
+![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/adept/raw/Screenshots/xcodeStructure.png?at=refs%2Fheads%2Fmaster)  
 
 The main files/ folders you will be working with are:
 
@@ -137,7 +137,7 @@ Once you have customized and compiled the app it will need to packaged as a nati
 We reccomend including the contents of the PKG Resources folder within your package. Included in this folder are a launcher script which checks if DEP-Enrolment apps has run previously and if it competed sucessfully, and a luanch agent used to run the app after package instalation and a postflight script to launch the screens after instalation.
 
 Below is a example of the internal layout of the package  
-![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/dep-enrolment/raw/Screenshots/PackageLayout.png?at=refs%2Fheads%2Fmaster)  
+![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/adept/raw/Screenshots/PackageLayout.png?at=refs%2Fheads%2Fmaster)  
 
 ##### Create Policy to Deploy DEP-Enrolment app  
 
@@ -147,7 +147,7 @@ Below is a example of the internal layout of the package
 
 This will download and run the the DEP- app as root POST Enrollment, you should see something similar to the below:  
 
-![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/dep-enrolment/raw/Screenshots/View%201.png?at=refs%2Fheads%2Fmaster)  
+![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/adept/raw/Screenshots/View%201.png?at=refs%2Fheads%2Fmaster)  
 
 ##### Create Policy to check if DEP-Enrolment app completed (optional)
 1. Create a policy with the 'Login' trigger
@@ -194,6 +194,6 @@ exit 0
 
 Note: The receipts get cleaned once the finish button is pressed.  
 
-![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/dep-enrolment/raw/Screenshots/InstallProgress.png?at=refs%2Fheads%2Fmaster)  
+![alt tag](https://git.tramscloud.co.uk/projects/XCOD/repos/adept/raw/Screenshots/InstallProgress.png?at=refs%2Fheads%2Fmaster)  
 
   
